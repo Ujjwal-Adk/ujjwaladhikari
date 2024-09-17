@@ -1,42 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Website</title>
-</head>
-<body>
-    <header>
-        <a href="#" class="logo">Ujjwal Adhikari</a>
-
-        <nav>
-            <a href="#" class="active"> Home</a>
-            <a href="#" >Services</a>
-            <a href="#" >Skills</a>
-            <a href="#" >Education</a>
-            <a href="#" >Experience</a>
-            <a href="#" >Contact</a>
-        </nav>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <a href="#home" class="logo">
+        Ujjwal
+        <span>Adhikari</span>
+      </a>
+      <i class="bx bx-menu" id="menu-icon"></i>
+      <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#achievments">Achievements</a>
+        <a href="#skillslearned">Skills Learned</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact me</a>
+      </nav>
     </header>
-    <section class="home">
-        <div class="home-img">
-            <img src="main.jpeg" alt="">
+    <section class="home" id="home">
+      <div class="home-content">
+        <h1>Hi, Its <span>Ujjwal !</span></h1>
+        <h3>I'm a <span>Student</span></h3>
+        <p>
+          Beginner developer passionate about learning and growing in web
+          development and technology. Currently, I'm building my skills in HTML,
+          CSS, JavaScript, and frameworks of JS and CSS with web performance.
+          Excited to connect and collaborate with others on exciting ideas!
+        </p>
+        <div class="social-icons">
+          <a href="https://github.com/Ujjwal-Adk">
+            <img class="icon" src="img/github.png" alt="GitHub Logo" />
+          </a>
+          <a href=" https://www.instagram.com/ujjwal_adk_/">
+            <img class="icon" src="img/insta.png" alt="GitHub Logo" />
+          </a>
+          <a href="https://x.com/UjjwalA99175905">
+            <img class="icon" src="img/x.png" alt="GitHub Logo" />
+          </a>
+          <a href="https://www.linkedin.com/in/ujjwal-adk7/">
+            <img class="icon" src="img/linkedin.png" alt="GitHub Logo" />
+          </a>
         </div>
-        <div class="home-content">
-            <h1>Hi, It's <span>Ujjwal</span></h1>
-            <h3 class="typing-text">I'm a <span></span></h3>
-            <p>Passionate student and aspiring developer eager to continuously expand my knowledge. Excited to learn and grow in the ever-evolving world of technology.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <a href="#" class="btn">Contact me</a>
+        <div class="btn-group">
+          <a href="#contact" class="btn">Contact Me</a>
         </div>
+      </div>
+      <div class="home-img">
+        <img src="img/profile.jpg" alt="image" />
+      </div>
     </section>
-</body>
+
+    <section class="about" id="about">
+      <div class="about-img">
+        <img src="img/about.jpg" />
+      </div>
+      <div class="about-content">
+        <h2>About <span>Me</span></h2>
+        <p>
+          I love diving into new technologies, and I’m always looking for ways
+          to expand my knowledge and improve my craft. In my free time, I'm
+          working on personal projects and building a professional portfolio. I
+          enjoy turning ideas into digital experiences while continually
+          learning new technologies and improving my skills.
+        </p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </section>
+
+    <section class="services" id="achievments">
+      <h2 class="heading">Achievments</h2>
+      <div class="services-container">
+        <div class="service-box">
+          <div class="service-info">
+            <img src="img/a1.jpg" alt="Achievement 1" class="icons" />
+            <h4>First place in Grand Science Exhibition</h4>
+            <p>
+              I secured first place in the Chief of Army Staff (COAS) Grand
+              Science Exhibition in 2079 BS (2023 AD). My role involved managing
+              circuits and programming, overcoming challenges to execute the
+              project successfully. I was honored to receive the award from the
+              Chief of Army Staff of Nepal, marking a significant milestone in
+              my journey.
+            </p>
+          </div>
+        </div>
+        <div class="service-box">
+          <div class="service-info">
+            <img src="img/a3.jpg" alt="Achievement 1" class="icons" />
+            <h4>Board member and robotics moderator</h4>
+            <p>
+              I was appointed as a prefectural board member and robotics
+              moderator in grade 12, where I guided teams in developing
+              innovative projects. This role significantly enhanced my
+              leadership skills, self-confidence, and ability to collaborate
+              effectively with peers. It provided me with valuable experience in
+              problem-solving and team management, which has been instrumental
+              in my personal and academic growth.
+            </p>
+          </div>
+        </div>
+        <div class="service-box">
+          <div class="service-info">
+            <img src="img/a2.jpg" alt="Achievement 1" class="icons" />
+            <h4>Victory in a school-wide quiz competition</h4>
+            <p>
+              In grade 10, I led my house team to victory in a school-wide quiz
+              competition. As the house leader, I played a key role in
+              strategizing and guiding my team, which helped sharpen my critical
+              thinking, teamwork, and leadership abilities. This achievement
+              further strengthened my confidence and ability to perform under
+              pressure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="services" id="skillslearned">
+      <h2 class="heading">Slills Learned</h2>
+      <div class="services-container">
+        <div class="service-box">
+          <div class="service-info">
+            <img class="icons" src="img/js.png" alt="GitHub Logo" />
+            <h4>Javascript</h4>
+            <p>
+              I have acquired foundational knowledge of JavaScript at the
+              beginner level, gaining experience in basic programming concepts,
+              DOM manipulation, and building simple interactive web elements.
+              I’m continuing to expand my skills to enhance functionality in web
+              development projects.
+            </p>
+          </div>
+        </div>
+        <div class="service-box">
+          <div class="service-info">
+            <img class="icons" src="img/css.png" alt="GitHub Logo" />
+            <h4>CSS</h4>
+            <p>
+              I have developed a strong understanding of CSS, focusing on
+              styling web pages, creating responsive layouts, and implementing
+              modern design techniques like Flexbox and Grid. My skills allow me
+              to build visually appealing and user-friendly websites.
+            </p>
+          </div>
+        </div>
+        <div class="service-box">
+          <div class="service-info">
+            <img class="icons" src="img/python.png" alt="GitHub Logo" />
+            <h4>Python</h4>
+            <p>
+              I have a basic understanding of Python, including object-oriented
+              programming (OOP) principles. This foundation allows me to create
+              well-structured code and implement key OOP concepts such as
+              classes, inheritance, and encapsulation in my projects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="education" id="education">
+      <h2 class="heading">My <span>Education</span></h2>
+      <div class="timeline">
+        <div class="container right">
+          <dic class="content">
+            <div class="tag">
+              <h2>SEE</h2>
+              <div class="decs">
+                <p>
+                  Completed SEE from Buddha Jyoti Academy with grade 3.7(A+)
+                </p>
+              </div>
+            </div></dic
+          >
+        </div>
+        <div class="container left">
+          <dic class="content">
+            <div class="tag">
+              <h2>SLC</h2>
+              <div class="decs">
+                <p>
+                  Completed SEE from Ripumardini Sainik Mahavidhyalaya with
+                  grade 3.42(A)
+                </p>
+              </div>
+            </div></dic
+          >
+        </div>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <h2 class="heading">Contact<span>Me</span></h2>
+
+      <form action="">
+        <div class="input-group">
+          <div class="input-box">
+            <input type="text" placeholder="Full Name" />
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="input-box">
+            <input type="number" placeholder="Phone" />
+            <input type="text" placeholder="Subject" />
+          </div>
+        </div>
+        <div class="input-group-2">
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Your Message"
+          ></textarea>
+          <input type="submit" value="Send Message" class="btn" />
+        </div>
+      </form>
+    </section>
+    <footer class="footer">
+      <div class="social-icons">
+        <a href="https://github.com/Ujjwal-Adk">
+          <img class="icon" src="img/github.png" alt="GitHub Logo" />
+        </a>
+        <a href=" https://www.instagram.com/ujjwal_adk_/">
+          <img class="icon" src="img/insta.png" alt="GitHub Logo" />
+        </a>
+        <a href="https://x.com/UjjwalA99175905">
+          <img class="icon" src="img/x.png" alt="GitHub Logo" />
+        </a>
+        <a href="https://www.linkedin.com/in/ujjwal-adk7/">
+          <img class="icon" src="img/linkedin.png" alt="GitHub Logo" />
+        </a>
+      </div>
+      <ul class="list">
+        <li>
+          <a href="#home">Home</a>
+        </li>
+        <li>
+          <a href="#about">About</a>
+        </li>
+        <li>
+          <a href="#achievments">Achievements</a>
+        </li>
+        <li>
+          <a href="#skillslearned">Skills Learned</a>
+        </li>
+        <li>
+          <a href="#education">Education</a>
+        </li>
+        <li>
+          <a href="#contact">Contact me</a>
+        </li>
+      </ul>
+      <ul class="list">
+        <li></li>
+      </ul>
+      <ul class="list">
+        <li>
+          Email:
+          <a>ujjwal.official010@gmail.com</a>
+        </li>
+        <li>
+          Phone:
+          <a> +977 9849142527</a>
+        </li>
+      </ul>
+      <p class="copyright">Ujjwal Adhikari | All Rights Reserved</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>

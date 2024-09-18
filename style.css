@@ -370,9 +370,17 @@ box-shadow: 0 0 25px var(--main-color),
 }
 
 .icon{
-    width:1vw;
+    width: 1.5vw;
     border-radius: 50%;
     box-shadow:0 0 25px var(--main-color) ;
+}
+
+@media (max-width: 768px) {
+    .icon {
+        width: 5vw; /* Make the icons bigger on mobile */
+        height: 5vw; /* Maintain the square shape */
+        box-shadow: 0 0 20px var(--main-color); /* Slightly reduce shadow for smaller screens */
+    }
 }
 .icons{
     width: 15vw;

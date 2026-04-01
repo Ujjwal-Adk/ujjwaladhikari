@@ -316,6 +316,155 @@ box-shadow: 0 0 25px var(--main-color),
     font-size: 16px;
 }
 
+/* ===== @keyframes Animations ===== */
+
+/* Fade in and slide up — used for home content on page load */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulsing glow — draws attention to the profile image */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 25px var(--main-color);
+  }
+  50% {
+    box-shadow: 0 0 45px var(--main-color), 0 0 80px rgba(0, 255, 81, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 25px var(--main-color);
+  }
+}
+
+/* Staggered pop-in for social icons */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Gentle pulse for the CTA button — guides the user toward action */
+@keyframes btnPulse {
+  0% {
+    box-shadow: 0 0 25px var(--main-color);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--main-color), 0 0 60px rgba(0, 255, 81, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 25px var(--main-color);
+  }
+}
+
+/* Slide in from left — for section headings */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Border draw animation for service/skill cards */
+@keyframes borderDraw {
+  0% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: var(--main-color);
+  }
+}
+
+/* ===== Apply Animations ===== */
+
+/* Home content fades in and slides up on load */
+.home-content h1 {
+  animation: fadeInUp 1s ease forwards;
+}
+.home-content h3 {
+  animation: fadeInUp 1s ease 0.3s forwards;
+  opacity: 0;
+}
+.home-content p {
+  animation: fadeInUp 1s ease 0.6s forwards;
+  opacity: 0;
+}
+
+/* Profile image gets a continuous subtle glow pulse */
+.home-img img {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Social icons pop in one by one */
+.home .social-icons a:nth-child(1) {
+  animation: popIn 0.5s ease 1s forwards;
+  opacity: 0;
+}
+.home .social-icons a:nth-child(2) {
+  animation: popIn 0.5s ease 1.15s forwards;
+  opacity: 0;
+}
+.home .social-icons a:nth-child(3) {
+  animation: popIn 0.5s ease 1.3s forwards;
+  opacity: 0;
+}
+.home .social-icons a:nth-child(4) {
+  animation: popIn 0.5s ease 1.45s forwards;
+  opacity: 0;
+}
+
+/* CTA button pulses gently to attract attention */
+.btn-group .btn {
+  animation: btnPulse 2.5s ease-in-out infinite;
+}
+
+/* Section headings slide in from the left */
+.heading {
+  animation: slideInLeft 0.8s ease forwards;
+}
+
+/* About section image also gets the glow pulse */
+.about-img img {
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+/* Service/skill cards fade in with stagger */
+.service-box:nth-child(1) {
+  animation: fadeInUp 0.6s ease 0.2s forwards;
+  opacity: 0;
+}
+.service-box:nth-child(2) {
+  animation: fadeInUp 0.6s ease 0.4s forwards;
+  opacity: 0;
+}
+.service-box:nth-child(3) {
+  animation: fadeInUp 0.6s ease 0.6s forwards;
+  opacity: 0;
+}
+
+/* Service box hover gets a border-draw effect */
+.service-box:hover {
+  animation: borderDraw 0.4s ease forwards;
+}
+
 @media(max-width:1024px){
     #menu-icon{
         display: block;

@@ -68,6 +68,43 @@
     burger.setAttribute("aria-expanded", "false");
     if (lenis) lenis.start();
   }
+  var curtain = document.createElement("div");
+  curtain.className = "curtain";
+  curtain.setAttribute("aria-hidden", "true");
+  curtain.innerHTML = "<i></i><i></i><i></i>";
+  document.body.appendChild(curtain);
+  var sweeping = false;
+  function jump(target, id) {
+    var y = id === "#top" ? 0 : Math.max(0, target.getBoundingClientRect().top + window.scrollY - 40);
+    window.scrollTo({ top: y, behavior: "instant" });
+    if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+  }
+  function sweep(target, id) {
+    if (reduce || !curtain.animate || document.hidden) { jump(target, id); return; }
+    if (sweeping) return;
+    sweeping = true;
+    var bands = $$("i", curtain), jumped = false, finished = false;
+    curtain.style.visibility = "visible";
+    var ease = "cubic-bezier(.7, 0, .2, 1)";
+    function doJump() { if (!jumped) { jumped = true; jump(target, id); } }
+    function finish() {
+      if (finished) return;
+      finished = true; doJump();
+      bands.forEach(function (b) { b.getAnimations().forEach(function (a) { a.cancel(); }); });
+      curtain.style.visibility = "hidden";
+      sweeping = false;
+    }
+    setTimeout(finish, 2200); // safety net if animations stall
+    var ins = bands.map(function (b, i) {
+      return b.animate([{ transform: "translateX(-101%)" }, { transform: "translateX(0)" }], { duration: 480, delay: i * 90, easing: ease, fill: "forwards" }).finished;
+    });
+    Promise.all(ins).then(function () {
+      doJump();
+      return Promise.all(bands.map(function (b, i) {
+        return b.animate([{ transform: "translateX(0)" }, { transform: "translateX(101%)" }], { duration: 520, delay: 120 + i * 90, easing: ease, fill: "forwards" }).finished;
+      }));
+    }).then(finish, finish);
+  }
   $$('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -76,8 +113,7 @@
       if (!target) return;
       e.preventDefault();
       closeMenu();
-      if (lenis) lenis.scrollTo(id === "#top" ? 0 : target, { offset: -40 });
-      else target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      sweep(target, id);
     });
   });
   burger.addEventListener("click", function () {
@@ -125,9 +161,39 @@
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(go); setTimeout(go, 800); } else { go(); }
 
   /* ---------- Scroll reveal ---------- */
+  // Split headings into words that slide up out of a mask
+  var wi = 0;
+  function splitWords(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+          var w = document.createElement("span"); w.className = "wm";
+          var s = document.createElement("span"); s.textContent = part; s.style.setProperty("--wi", wi++);
+          w.appendChild(s); frag.appendChild(w);
+        });
+        node.replaceChild(frag, n);
+      } else if (n.nodeType === 1) splitWords(n);
+    });
+  }
+  $$("h2.reveal").forEach(function (h) { wi = 0; splitWords(h); });
+
+  // Direction for each kind of element
+  $$(".portrait, .timeline li:nth-child(odd)").forEach(function (el) { el.dataset.fx = "left"; });
+  $$(".timeline li:nth-child(even)").forEach(function (el) { el.dataset.fx = "right"; });
+  $$(".skill, .project, .meaning li").forEach(function (el) { el.dataset.fx = "pop"; });
+  $$(".ach").forEach(function (el, i) { el.dataset.fx = i % 2 ? "right" : "left"; });
+  $$(".about-copy > p, .form").forEach(function (el) { el.dataset.fx = "right"; });
+
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      if (en.isIntersecting) {
+        var t = en.target;
+        t.classList.add("in"); io.unobserve(t);
+        setTimeout(function () { t.classList.add("done"); }, 1400);
+      }
     });
   }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
   $$(".reveal").forEach(function (el) {
@@ -137,7 +203,7 @@
   });
 
   /* ---------- Scroll: progress bar, nav, active link, timeline ---------- */
-  var bar = $(".progress i"), nav = $("#nav"), tls = $$(".timeline");
+  var bar = $(".progress i"), nav = $("#nav"), tls = $$(".timeline"), waves = $$(".waves svg");
   var links = $$("#menu a").filter(function (a) { return a.getAttribute("href").length > 1 && !a.classList.contains("nav-cta"); });
   var sections = links.map(function (a) { return $(a.getAttribute("href")); });
   var ticking = false;
@@ -148,6 +214,10 @@
     var cur = -1;
     sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top < innerHeight * 0.4) cur = i; });
     links.forEach(function (a, i) { a.classList.toggle("active", i === cur); });
+    waves.forEach(function (w) {
+      var r = w.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) w.style.setProperty("--wx", ((r.top - innerHeight / 2) * 0.08) + "px");
+    });
     tls.forEach(function (tl) {
       var r = tl.getBoundingClientRect();
       var p = (innerHeight * 0.7 - r.top) / r.height;

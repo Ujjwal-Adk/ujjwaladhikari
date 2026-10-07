@@ -1,0 +1,57 @@
+/* Ujjwal Adhikari — brand design tokens
+   Every colour comes straight from the logo. Drop this into the site and build on it. */
+
+:root {
+  /* Core palette (sampled from the logo artwork) */
+  --ocean-blue: #0396C7;   /* trust, calm, technology — primary brand colour */
+  --leaf-green: #2D6A4F;   /* growth, learning, roots */
+  --sun-gold:   #E5A523;   /* light, warmth, energy — "Ujjwal" means light */
+  --sky-blue:   #B4E3FA;   /* freedom, openness, clarity */
+  --deep-navy:  #0B2A3C;   /* text + dark backgrounds, professional */
+  --trunk-brown:#5A3E1C;   /* tiny accent only (palm trunk) */
+  --white:      #FFFFFF;
+
+  /* Helpful extra shades (derived, use sparingly) */
+  --navy-900:   #071C29;   /* darkest background */
+  --navy-700:   #0F3A52;   /* raised cards on dark */
+  --blue-600:   #027AA3;   /* hover / pressed blue */
+  --gold-300:   #F2C766;   /* soft glow / highlights */
+  --green-300:  #6FAF8C;   /* light green for text on dark */
+  --sky-50:     #EEF8FE;   /* very light section background */
+
+  /* Semantic roles — light theme */
+  --bg:         var(--white);
+  --bg-soft:    var(--sky-50);
+  --text:       var(--deep-navy);
+  --text-muted: #4A6274;
+  --primary:    var(--ocean-blue);  /* fills, large headings, icons — NOT small text on white (3.4:1) */
+  --link:       var(--blue-600);    /* small text / links on white (4.9:1) */
+  --accent:     var(--sun-gold);    /* glows, highlights, gold buttons with navy text — never as text on white (2.2:1) */
+  --on-accent:  var(--deep-navy);   /* text on gold buttons (6.9:1) */
+  --success:    var(--leaf-green);
+  --border:     #D6E6EF;
+
+  /* Signature gradient: sunrise light over ocean (use for hero glow, buttons, highlights) */
+  --gradient-light: radial-gradient(circle at 30% 30%, rgba(229,165,35,.55), rgba(229,165,35,0) 60%);
+  --gradient-brand: linear-gradient(120deg, var(--ocean-blue) 0%, var(--leaf-green) 55%, var(--sun-gold) 100%);
+
+  /* Type */
+  --font-display: "Montserrat", system-ui, sans-serif;  /* headings, name — close to the business card */
+  --font-body:    "Inter", system-ui, sans-serif;        /* paragraphs, UI */
+  --font-code:    "JetBrains Mono", ui-monospace, monospace; /* </> accents, tags, code snippets */
+
+  --radius: 16px;
+}
+
+/* Dark theme — deep navy night sky with the gold "light" glowing */
+[data-theme="dark"] {
+  --bg:         var(--navy-900);
+  --bg-soft:    var(--deep-navy);
+  --text:       #EAF4FA;
+  --text-muted: #9FB8C8;
+  --primary:    #2BB3E3;
+  --link:       #2BB3E3;
+  --accent:     var(--sun-gold);            /* gold text is fine on navy (8:1) */
+  --success:    var(--green-300);
+  --border:     #1E4A63;
+}

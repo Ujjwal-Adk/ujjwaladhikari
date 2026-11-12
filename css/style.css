@@ -345,3 +345,37 @@ h2.in .wm > span { transform: none; }
   .logo-glow { opacity: 1; }
   .sea { animation: none; }
 }
+
+/* Portfolio case studies and stable value cards */
+[hidden] { display: none !important; }
+.meaning { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.js .meaning li.reveal, .meaning li:hover { transform: none; }
+.meaning li { min-width: 0; transition: opacity .7s ease, border-color .3s, box-shadow .3s; }
+.projects { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.project { min-width: 0; }
+.project-cover { min-height: 220px; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; background: var(--deep-navy); color: #fff; }
+.project-cover span, .project-cover small { font-family: var(--font-code); color: #B5E4FA; font-size: .8rem; }
+.project-cover strong { font-family: var(--font-display); font-size: 1.8rem; line-height: 1.2; }
+.project:first-child .project-cover { background: #204d3b; }
+.project figure { margin: 0; }
+.project figcaption { padding: .6rem 1.5rem; font-size: .75rem; color: var(--text-muted); }
+.project .project-role { font-family: var(--font-code); font-size: .78rem; color: var(--link); margin-bottom: 1rem; }
+.project-status { color: var(--text-muted); font-size: .85rem; margin: .75rem 0; }
+.case-study { margin-top: 1.25rem; border-top: 1px solid var(--border); }
+.case-study summary { cursor: pointer; padding: 1rem 0; font-weight: 600; color: var(--link); }
+.case-study summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.case-copy h4 { margin: 1.25rem 0 .5rem; font-size: 1rem; }
+.case-copy ul { list-style: disc; padding-left: 1.2rem; color: var(--text-muted); }
+.case-copy li { margin: .6rem 0; }
+.case-copy a { color: var(--link); text-decoration: underline; }
+.brand-gallery { display: grid; gap: 1rem; margin: 1.5rem 0; }
+.brand-gallery img { width: 100%; height: auto; border-radius: 8px; }
+.ach-text { grid-template-columns: 1fr; }
+.links span { flex-shrink: 0; }
+.links p { margin: 0; }
+button:disabled { opacity: .65; cursor: wait; }
+.contact-fallback { padding: 2rem; border: 1px solid #1E4A63; border-radius: 24px; }
+.contact-fallback p { margin-bottom: 1.25rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-width: 1000px) { .projects { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .meaning { grid-template-columns: 1fr; } }

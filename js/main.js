@@ -11,43 +11,7 @@
   /* ---------- Year ---------- */
   $("#year").textContent = new Date().getFullYear();
 
-  /* ---------- Projects (data lives in content.js) ---------- */
-  (function renderProjects() {
-    var grid = $("#projectGrid");
-    var list = window.PROJECTS || [];
-    var esc = function (s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
-
-    if (!list.length) {
-      grid.innerHTML =
-        '<div class="empty reveal">' +
-        '<p class="label"><span>&lt;coming-soon/&gt;</span></p>' +
-        "<h3>New projects are on the way.</h3>" +
-        "<p>I'm learning by building, and I'll add my projects here as soon as they're ready to share. In the meantime you can follow my code on GitHub.</p>" +
-        '<a class="btn btn-ghost magnetic" href="' + esc(window.GITHUB_URL) + '" target="_blank" rel="noopener"><span>Visit my GitHub</span></a>' +
-        "</div>";
-      return;
-    }
-
-    grid.innerHTML = list.map(function (p) {
-      return '<article class="project tilt reveal">' +
-        (p.image ? '<div class="shot"><img src="' + esc(p.image) + '" alt="Screenshot of ' + esc(p.title) + '" loading="lazy" /></div>' : "") +
-        '<div class="body"><h3>' + esc(p.title) + "</h3><p>" + esc(p.description || "") + "</p>" +
-        (p.tech && p.tech.length ? '<ul class="tags">' + p.tech.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
-        '<div class="plinks">' +
-        (p.live ? '<a href="' + esc(p.live) + '" target="_blank" rel="noopener">Live site</a>' : "") +
-        (p.repo ? '<a href="' + esc(p.repo) + '" target="_blank" rel="noopener">Code</a>' : "") +
-        "</div></div></article>";
-    }).join("");
-  })();
-
-  /* ---------- Upwork link (set UPWORK_URL in content.js) ---------- */
-  if (window.UPWORK_URL) {
-    $$("[data-upwork]").forEach(function (el) {
-      el.hidden = false;
-      var a = el.tagName === "A" ? el : $("a", el);
-      a.href = window.UPWORK_URL; a.target = "_blank"; a.rel = "noopener";
-    });
-  }
+  // Case studies are rendered in HTML so they also work without JavaScript.
 
   /* ---------- Theme toggle ---------- */
   $("#theme").addEventListener("click", function () {
@@ -183,7 +147,7 @@
   // Direction for each kind of element
   $$(".portrait, .timeline li:nth-child(odd)").forEach(function (el) { el.dataset.fx = "left"; });
   $$(".timeline li:nth-child(even)").forEach(function (el) { el.dataset.fx = "right"; });
-  $$(".skill, .project, .meaning li").forEach(function (el) { el.dataset.fx = "pop"; });
+  $$(".skill, .project").forEach(function (el) { el.dataset.fx = "pop"; });
   $$(".ach").forEach(function (el, i) { el.dataset.fx = i % 2 ? "right" : "left"; });
   $$(".about-copy > p, .form").forEach(function (el) { el.dataset.fx = "right"; });
 
@@ -325,22 +289,33 @@
     })(0);
   }
 
-  /* ---------- Contact form: opens the visitor's email app ---------- */
+  /* ---------- Resume and direct contact ---------- */
+  if (window.RESUME_URL) {
+    $("[data-resume]").forEach(function (link) { link.href = window.RESUME_URL; link.hidden = false; });
+  }
   var form = $("#form"), note = $("#formNote");
-  form.addEventListener("submit", function (e) {
+  var endpoint = window.FORMSPREE_URL || "";
+  if (/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)) {
+    form.action = endpoint;
+    form.hidden = false;
+    $("#contactFallback").hidden = true;
+  }
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    var f = form.elements, ok = true;
-    ["name", "email", "message"].forEach(function (n) {
-      var bad = !f[n].value.trim() || (n === "email" && !/^\S+@\S+\.\S+$/.test(f[n].value));
-      f[n].setAttribute("aria-invalid", bad ? "true" : "false");
-      if (bad) ok = false;
-    });
+    if (!endpoint || !form.reportValidity()) return;
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
     note.className = "form-note";
-    if (!ok) { note.textContent = "Please fill in your name, a valid email and a message."; note.classList.add("err"); return; }
-    var subject = f.subject.value.trim() || "Hello from your portfolio";
-    var body = f.message.value.trim() + "\n\n" + f.name.value.trim() + "\n" + f.email.value.trim();
-    location.href = "mailto:ujjwal.official010@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    note.textContent = "Thanks, " + f.name.value.trim() + "! Your email app should open with the message ready to send.";
-    note.classList.add("ok");
+    note.textContent = "Sending your message…";
+    try {
+      var response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Message not accepted");
+      form.reset();
+      note.classList.add("ok");
+      note.textContent = "Thank you! Your message has been sent. I’ll reply within one business day.";
+    } catch (error) {
+      note.classList.add("err");
+      note.textContent = "Your message could not be sent. Please try again or email ujjwal.official010@gmail.com. Your message is still here.";
+    } finally { button.disabled = false; }
   });
 })();
